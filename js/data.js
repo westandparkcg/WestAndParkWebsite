@@ -159,7 +159,7 @@ export const SERVICES = [
     name: 'Facility Services',
     blurb:
       'The partnership continues after the ribbon cutting — occupied renovations, tenant improvements, maintenance programs, and emergency response.',
-    points: ['Occupied-building renovation', 'Tenant improvements', 'Planned maintenance programs', '24/7 emergency response'],
+    points: ['Occupied-building renovation', 'Tenant improvements', 'Planned maintenance programs', 'Emergency response'],
   },
 ];
 

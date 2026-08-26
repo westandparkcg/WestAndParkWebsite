@@ -4,26 +4,39 @@ import { initChrome, initReveals } from './ui.js';
 initChrome();
 
 /* ---------- Form ----------
-   Static-site placeholder: composes a mailto draft.
-   To go live, point this at your form backend (Formspree,
-   Basin, Netlify Forms, or your own endpoint) instead. */
+   Delivers via FormSubmit to westandparkcg@gmail.com.
+   NOTE: the very first submission triggers a one-time activation
+   email from FormSubmit to that inbox — click "Activate" once and
+   all future submissions arrive normally.
+   When the company domain email is ready, change INBOX below. */
+const INBOX = 'westandparkcg@gmail.com';
 const form = document.querySelector('[data-contact-form]');
 const status = document.querySelector('[data-form-status]');
-form?.addEventListener('submit', (e) => {
+form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!form.reportValidity()) return;
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  status.textContent = 'Sending…';
   const d = new FormData(form);
-  const body = [
-    `Name: ${d.get('name')}`,
-    `Company: ${d.get('company') || '—'}`,
-    `Email: ${d.get('email')}`,
-    `Phone: ${d.get('phone') || '—'}`,
-    `Project type: ${d.get('type')}`,
-    '',
-    d.get('message'),
-  ].join('\n');
-  location.href = `mailto:build@westandparkcg.com?subject=${encodeURIComponent('New project inquiry — ' + d.get('name'))}&body=${encodeURIComponent(body)}`;
-  status.textContent = 'Your email app should open with the message drafted. If it doesn’t, email build@westandparkcg.com directly.';
+  d.append('_subject', `New project inquiry — ${d.get('name')}`);
+  d.append('_template', 'table');
+  d.append('_captcha', 'false');
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${INBOX}`, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: d,
+    });
+    const out = await res.json();
+    if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || String(res.status));
+    status.textContent = 'Sent — thank you. A project executive will reply within one business day.';
+    form.reset();
+  } catch {
+    status.textContent = `Something went wrong sending the form. Please email ${INBOX} directly.`;
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 /* ---------- Planner ---------- */
