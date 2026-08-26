@@ -384,8 +384,129 @@ function renderBefore(prims, id, label) {
 </svg>`;
 }
 
+/* ============================================================
+   HERO SKYLINE — a wide, purpose-drawn composition that reads
+   at a glance: blueprint wireframes (left) → tower crane on an
+   active build (center) → finished, lit buildings (right).
+   ============================================================ */
+function renderSkyline() {
+  const SW = 1600, SH = 900;
+  const wire = '#8FA6C8', wireGold = '#C9A24B';
+
+  const litCells = (x, y, w, h, cols, rows, seed, chance) => {
+    const rnd = seeded(seed);
+    const gap = 6, cw = (w - gap * (cols - 1)) / cols, ch = (h - gap * (rows - 1)) / rows;
+    let s = '';
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        s += `<rect x="${x + c * (cw + gap)}" y="${y + r * (ch + gap)}" width="${cw}" height="${ch}" fill="${rnd() < chance ? 'url(#wpLitH)' : P.glass}"/>`;
+    return s;
+  };
+
+  const wireCells = (x, y, w, h, cols, rows) => {
+    const gap = 6, cw = (w - gap * (cols - 1)) / cols, ch = (h - gap * (rows - 1)) / rows;
+    let s = '';
+    for (let r = 0; r < rows; r++)
+      for (let c = 0; c < cols; c++)
+        s += `<rect x="${x + c * (cw + gap)}" y="${y + r * (ch + gap)}" width="${cw}" height="${ch}" fill="none" stroke="${wire}" stroke-width="1.2" stroke-dasharray="4 4"/>`;
+    return s;
+  };
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${SW} ${SH}" preserveAspectRatio="xMidYMax slice" role="img" aria-label="City skyline moving from blueprint drawings through active construction to finished, lit buildings">
+  <defs>
+    <linearGradient id="wpSkyH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${P.skyTop}"/><stop offset="1" stop-color="${P.skyBottom}"/>
+    </linearGradient>
+    <linearGradient id="wpLitH" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${P.litBright}"/><stop offset="1" stop-color="${P.lit}"/>
+    </linearGradient>
+  </defs>
+  <rect width="${SW}" height="${SH}" fill="url(#wpSkyH)"/>
+
+  <!-- distant silhouettes -->
+  <rect x="285" y="500" width="80" height="350" fill="${P.massDark}"/>
+  <rect x="565" y="530" width="70" height="320" fill="${P.massDark}"/>
+  <rect x="1232" y="470" width="70" height="380" fill="${P.massDark}"/>
+
+  <!-- A: blueprint low-rise -->
+  <g>
+    <line x1="60" y1="336" x2="300" y2="336" stroke="${wireGold}" stroke-width="1.5"/>
+    <line x1="60" y1="328" x2="60" y2="344" stroke="${wireGold}" stroke-width="1.5"/>
+    <line x1="300" y1="328" x2="300" y2="344" stroke="${wireGold}" stroke-width="1.5"/>
+    <rect x="60" y="380" width="240" height="470" fill="none" stroke="${wireGold}" stroke-width="2.5"/>
+    <line x1="60" y1="404" x2="300" y2="404" stroke="${wire}" stroke-width="1.2"/>
+    ${wireCells(76, 420, 208, 410, 4, 6)}
+  </g>
+
+  <!-- B: blueprint mid tower -->
+  <g>
+    <rect x="330" y="240" width="230" height="610" fill="none" stroke="${wireGold}" stroke-width="2.5"/>
+    <line x1="330" y1="266" x2="560" y2="266" stroke="${wire}" stroke-width="1.2"/>
+    ${wireCells(346, 282, 198, 550, 4, 8)}
+  </g>
+
+  <!-- C: under construction — built below, blueprint above -->
+  <g>
+    <rect x="620" y="180" width="280" height="380" fill="none" stroke="${wireGold}" stroke-width="2.5"/>
+    ${wireCells(636, 196, 248, 348, 5, 5)}
+    <rect x="620" y="560" width="280" height="290" fill="${P.mass}"/>
+    <rect x="620" y="554" width="280" height="10" fill="${P.accent}"/>
+    ${litCells(636, 580, 248, 250, 5, 4, 41, 0.5)}
+  </g>
+
+  <!-- tower crane -->
+  <g stroke="${wireGold}" stroke-width="5" stroke-linecap="square">
+    <line x1="946" y1="120" x2="946" y2="850"/>
+    <line x1="962" y1="120" x2="962" y2="850"/>
+    <line x1="946" y1="200" x2="962" y2="260"/><line x1="962" y1="200" x2="946" y2="260"/>
+    <line x1="946" y1="340" x2="962" y2="400"/><line x1="962" y1="340" x2="946" y2="400"/>
+    <line x1="946" y1="480" x2="962" y2="540"/><line x1="962" y1="480" x2="946" y2="540"/>
+    <line x1="946" y1="620" x2="962" y2="680"/><line x1="962" y1="620" x2="946" y2="680"/>
+    <line x1="600" y1="122" x2="1265" y2="122"/>
+  </g>
+  <g stroke="${wireGold}" stroke-width="2.5">
+    <line x1="954" y1="58" x2="612" y2="118"/>
+    <line x1="954" y1="58" x2="1255" y2="118"/>
+    <line x1="954" y1="58" x2="954" y2="120"/>
+  </g>
+  <rect x="1180" y="126" width="80" height="34" fill="${P.panel}"/>
+  <line x1="700" y1="126" x2="700" y2="152" stroke="${wireGold}" stroke-width="2.5"/>
+  <rect x="668" y="152" width="64" height="10" fill="url(#wpLitH)"/>
+
+  <!-- D: finished mid-rise -->
+  <g>
+    <rect x="1000" y="300" width="230" height="550" fill="${P.mass}"/>
+    <rect x="1000" y="300" width="230" height="14" fill="${P.panel}"/>
+    <rect x="1000" y="326" width="230" height="8" fill="${P.accent}"/>
+    ${litCells(1016, 348, 198, 440, 4, 7, 43, 0.45)}
+    <rect x="1016" y="800" width="198" height="36" fill="${P.glassDeep}"/>
+    ${litCells(1022, 806, 186, 24, 4, 1, 45, 0.7)}
+  </g>
+
+  <!-- E: finished tallest tower -->
+  <g>
+    <line x1="1380" y1="150" x2="1380" y2="96" stroke="${P.panelLight}" stroke-width="4"/>
+    <circle cx="1380" cy="92" r="5" fill="${P.litBright}"/>
+    <rect x="1270" y="150" width="220" height="700" fill="${P.mass}"/>
+    <rect x="1270" y="150" width="220" height="12" fill="${P.accent}"/>
+    ${litCells(1286, 180, 188, 580, 4, 9, 47, 0.4)}
+    <rect x="1286" y="784" width="188" height="52" fill="${P.glassDeep}"/>
+    ${litCells(1292, 790, 176, 40, 4, 1, 49, 0.65)}
+  </g>
+
+  <!-- F: small finished block -->
+  <rect x="1516" y="640" width="80" height="210" fill="${P.panel}"/>
+  ${litCells(1524, 656, 64, 150, 2, 3, 51, 0.4)}
+
+  <!-- ground -->
+  <rect x="0" y="850" width="${SW}" height="50" fill="${P.ground}"/>
+  <rect x="0" y="848" width="${SW}" height="4" fill="${P.panel}"/>
+</svg>`;
+}
+
 /* ---------- public API ---------- */
 export function renderScene(sceneId, mode, label = 'PROJECT') {
+  if (sceneId === 'skyline') return renderSkyline();
   const build = SCENES[sceneId];
   if (!build) throw new Error(`Unknown scene: ${sceneId}`);
   const prims = [];
