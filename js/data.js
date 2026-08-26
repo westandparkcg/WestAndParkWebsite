@@ -188,17 +188,4 @@ export const METHOD = [
     time: 'Construction',
     text: 'A dedicated superintendent, a weekly owner report you can read in five minutes, and a site your neighbors will compliment. Zero-surprise is the standard.',
   },
-  {
-    step: '05',
-    name: 'Stand Behind',
-    time: 'Years 1–2+',
-    text: 'A written two-year workmanship warranty, an 11-month walkthrough before it expires, and a facilities team on call after it does.',
-  },
-];
-
-export const STATS = [
-  { value: 25, suffix: '+', label: 'Years building' },
-  { value: 400, suffix: '+', label: 'Projects delivered' },
-  { value: 87, suffix: '%', label: 'Repeat & referral clients' },
-  { value: 0.68, suffix: '', label: 'Safety EMR', decimals: 2 },
 ];

@@ -1,29 +1,11 @@
 /* Homepage */
-import { PROJECTS, SERVICES, METHOD, STATS } from './data.js';
-import { initChrome, initReveals, mountScenes, projectCard, countUp, REDUCED } from './ui.js';
+import { PROJECTS, SERVICES, METHOD } from './data.js';
+import { initChrome, initReveals, mountScenes, projectCard } from './ui.js';
 import { initSliders } from './slider.js';
 
 initChrome();
 mountScenes();
 initSliders();
-
-/* Stats band */
-const statGrid = document.querySelector('[data-stats]');
-if (statGrid) {
-  statGrid.innerHTML = STATS.map(
-    (s) => `<div class="stat-cell"><div class="stat-value" data-v>${REDUCED ? '' : '0'}</div><div class="stat-label">${s.label}</div></div>`
-  ).join('');
-  const cells = statGrid.querySelectorAll('[data-v]');
-  const io = new IntersectionObserver(
-    (entries) => {
-      if (!entries[0].isIntersecting) return;
-      io.disconnect();
-      cells.forEach((el, i) => countUp(el, STATS[i].value, { decimals: STATS[i].decimals || 0, suffix: STATS[i].suffix }));
-    },
-    { threshold: 0.4 }
-  );
-  io.observe(statGrid);
-}
 
 /* Services bento */
 const bento = document.querySelector('[data-services]');

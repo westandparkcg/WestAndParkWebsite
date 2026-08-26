@@ -34,12 +34,16 @@ export function initChrome() {
   if (toggle) {
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
+      // nav-open neutralizes the header's transform/backdrop-filter so the
+      // fixed fullscreen menu isn't trapped in the header's containing block
+      header.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', String(open));
       document.body.style.overflow = open ? 'hidden' : '';
     });
     nav.addEventListener('click', (e) => {
       if (e.target.closest('a')) {
         nav.classList.remove('open');
+        header.classList.remove('nav-open');
         toggle.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
       }

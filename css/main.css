@@ -108,6 +108,14 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.06; font-weigh
   border-bottom-color: var(--line);
 }
 .site-header.hidden { transform: translateY(-100%); }
+/* While the mobile menu is open, the header must not create a containing
+   block (transform/backdrop-filter would trap the fixed fullscreen nav). */
+.site-header.nav-open {
+  transform: none;
+  backdrop-filter: none;
+  background: transparent;
+  border-bottom-color: transparent;
+}
 
 .header-inner {
   display: flex; align-items: center; gap: 2rem;
