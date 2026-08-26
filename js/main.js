@@ -31,7 +31,7 @@ if (bento) {
   bento.innerHTML = SERVICES.map(
     (s, i) => `
     <a class="bento-cell" href="/services.html#${s.id}">
-      <span class="cell-arrow" aria-hidden="true">↗</span>
+      <span class="cell-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></span>
       <span class="bento-num">0${i + 1}</span>
       <h3>${s.name}</h3>
       <p>${s.blurb}</p>

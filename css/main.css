@@ -394,6 +394,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.06; font-weigh
   position: absolute; top: 1.6rem; right: 1.6rem;
   color: var(--gold-600); transition: transform 0.35s var(--ease-out), color 0.35s;
 }
+.bento-cell .cell-arrow svg { width: 18px; height: 18px; }
 .bento-cell:hover .cell-arrow { transform: translate(4px, -4px); color: var(--gold-300); }
 
 /* ============ Project rail (horizontal scroll) ============ */
