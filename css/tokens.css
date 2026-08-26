@@ -1,0 +1,79 @@
+/* ============================================
+   West + Park Commercial Group — Design Tokens
+   Brand: navy #0B1D3A · gold #C9A24B · Montserrat
+   ============================================ */
+
+:root {
+  /* Brand core */
+  --navy-950: #060F1F;
+  --navy-900: #0B1D3A;   /* primary brand navy */
+  --navy-800: #10264A;
+  --navy-700: #1A335C;
+  --navy-600: #24406E;
+
+  --gold-300: #E6C77E;
+  --gold-400: #D9B45F;
+  --gold-500: #C9A24B;   /* primary brand gold */
+  --gold-600: #A57F2C;
+  --gold-700: #8A6820;
+
+  --slate-600: #3D4A5E;
+  --slate-500: #6B7785;
+  --slate-300: #BFC5CC;
+  --paper: #F2F4F7;
+  --white: #FFFFFF;
+
+  /* Semantic — dark editorial ground by default */
+  --bg: var(--navy-950);
+  --bg-raised: var(--navy-900);
+  --bg-panel: #0E2244;
+  --ink: #EDF1F6;
+  --ink-soft: #B9C3D2;
+  --ink-faint: #7E8CA0;
+  --line: rgba(191, 197, 204, 0.16);
+  --line-strong: rgba(191, 197, 204, 0.32);
+  --accent: var(--gold-500);
+  --accent-bright: var(--gold-300);
+  --accent-ink: #0B1D3A;      /* text on gold */
+
+  /* Light sections (paper interludes) */
+  --paper-bg: var(--paper);
+  --paper-ink: var(--navy-900);
+  --paper-ink-soft: var(--slate-600);
+  --paper-line: rgba(11, 29, 58, 0.14);
+
+  /* Type */
+  --font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.05rem, 1rem + 0.4vw, 1.25rem);
+  --text-xl: clamp(1.3rem, 1.1rem + 0.9vw, 1.75rem);
+  --text-2xl: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem);
+  --text-3xl: clamp(2.2rem, 1.6rem + 3vw, 4rem);
+  --text-hero: clamp(2.6rem, 1.8rem + 5.2vw, 6.5rem);
+
+  --tracking-wide: 0.18em;
+  --tracking-wider: 0.32em;
+
+  /* Rhythm */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6.5rem;
+  --space-section: clamp(4rem, 3rem + 6vw, 9rem);
+
+  --container: 1280px;
+  --container-wide: 1520px;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+
+  --radius: 2px;             /* sharp, architectural */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 0.6s;
+
+  --shadow-lift: 0 24px 60px -24px rgba(3, 8, 18, 0.7);
+}
