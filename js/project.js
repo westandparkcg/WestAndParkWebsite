@@ -47,10 +47,10 @@ document.querySelector('[data-case-body]').innerHTML = `
     ${p.stats.map(([lab, val]) => `<div class="case-outcome"><div class="val">${val}</div><div class="lab">${lab}</div></div>`).join('')}
   </div>
 
-  <blockquote class="case-quote">
+  ${p.quote ? `<blockquote class="case-quote">
     “${p.quote.text}”
     <footer><strong class="gold">${p.quote.author}</strong> — ${p.quote.role}</footer>
-  </blockquote>
+  </blockquote>` : ''}
 
   <nav class="case-nav" aria-label="More projects">
     <a class="btn-line" href="/project.html?id=${prev.id}">← ${prev.name}</a>

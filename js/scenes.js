@@ -236,6 +236,108 @@ const SCENES = {
     prims.push(rect(116, 446, 8, 12, 'massDark'));
   },
 
+  /* EVS / service room — shelving racks, mop sink, overhead pipes */
+  evsroom(prims) {
+    prims.push(rect(0, 0, W, 600, 'massDark'));
+    prims.push(rect(0, 460, W, 140, 'ground'));
+    prims.push(rect(0, 460, W, 8, 'panel'));
+    // overhead pipe runs
+    prims.push(lineSeg(0, 60, W, 60, 'steelLine'));
+    prims.push(lineSeg(0, 96, W, 96, 'steelLine'));
+    prims.push(lineSeg(620, 96, 620, 200, 'steelLine'));
+    prims.push(circle(620, 214, 14, 'accentSoft'));
+    // shelving rack 1
+    prims.push(rect(70, 150, 300, 310, 'mass'));
+    for (let s = 0; s < 4; s++) {
+      prims.push(rect(82, 176 + s * 76, 276, 8, 'accentSoft'));
+      for (let b = 0; b < 5; b++) {
+        prims.push(rect(94 + b * 52, 196 + s * 76, 34, 40, b % 2 ? 'glass' : 'panelLight'));
+      }
+    }
+    prims.push(rect(70, 150, 10, 310, 'panel'));
+    prims.push(rect(360, 150, 10, 310, 'panel'));
+    // shelving rack 2 (narrow)
+    prims.push(rect(420, 190, 150, 270, 'mass'));
+    prims.push(rect(430, 216, 130, 6, 'accentSoft'));
+    prims.push(rect(430, 292, 130, 6, 'accentSoft'));
+    prims.push(rect(430, 368, 130, 6, 'accentSoft'));
+    for (let b = 0; b < 3; b++) prims.push(rect(438 + b * 44, 234, 30, 46, 'panelLight'));
+    for (let b = 0; b < 3; b++) prims.push(rect(438 + b * 44, 310, 30, 46, 'glass'));
+    // mop sink + faucet
+    prims.push(rect(640, 380, 120, 80, 'panelLight'));
+    prims.push(rect(650, 390, 100, 60, 'glassDeep'));
+    prims.push(lineSeg(700, 340, 700, 384, 'steelLine'));
+    prims.push(lineSeg(684, 340, 716, 340, 'steelLine'));
+    // door
+    prims.push(rect(760, 180, 30, 280, 'panel'));
+    // ceiling light
+    prims.push(rect(300, 30, 180, 14, 'litGlow'));
+  },
+
+  /* Hospital corridor — handrails, bumper guard, doors, ceiling grid */
+  corridor(prims) {
+    prims.push(rect(0, 0, W, 600, 'massDark'));
+    prims.push(rect(0, 440, W, 160, 'ground'));
+    prims.push(rect(0, 440, W, 8, 'panel'));
+    // ceiling grid + lay-in lights
+    for (let i = 1; i < 8; i++) prims.push(lineSeg(i * 100, 0, i * 100, 80, 'mullion'));
+    prims.push(lineSeg(0, 80, W, 80, 'mullion'));
+    for (const lx of [130, 430, 660]) prims.push(rect(lx, 30, 120, 16, 'litGlow'));
+    // back wall
+    prims.push(rect(0, 80, W, 360, 'mass'));
+    // patient room doors
+    for (const dx of [90, 560]) {
+      prims.push(rect(dx, 140, 130, 300, 'glassDeep'));
+      prims.push(rect(dx, 140, 130, 10, 'accent'));
+      prims.push(rect(dx + 96, 280, 18, 6, 'steelBottle'));
+      prims.push(rect(dx + 20, 160, 90, 70, 'glass'));
+    }
+    // glazed bay between doors
+    prims.push(rect(290, 150, 200, 180, 'glass'));
+    prims.push(lineSeg(390, 150, 390, 330, 'mullion'));
+    // handrail + bumper guard
+    prims.push(rect(0, 340, W, 10, 'accentSoft'));
+    prims.push(rect(0, 396, W, 14, 'panelLight'));
+    // wayfinding blade
+    prims.push(rect(520, 96, 26, 90, 'accent'));
+    prims.push(circle(533, 120, 7, 'line'));
+  },
+
+  /* Operating room — surgical light, table, equipment booms */
+  surgical(prims) {
+    prims.push(rect(0, 0, W, 600, 'massDark'));
+    prims.push(rect(0, 470, W, 130, 'ground'));
+    // new floor: coved base + accent perimeter band
+    prims.push(rect(0, 470, W, 8, 'accent'));
+    // back wall tile joints
+    prims.push(rect(0, 60, W, 410, 'mass'));
+    for (let i = 1; i < 8; i++) prims.push(lineSeg(i * 100, 60, i * 100, 470, 'mullion'));
+    prims.push(lineSeg(0, 260, W, 260, 'mullion'));
+    // viewing window + scrub door
+    prims.push(rect(600, 130, 150, 120, 'glass'));
+    prims.push(rect(60, 150, 110, 320, 'glassDeep'));
+    prims.push(rect(60, 150, 110, 10, 'accent'));
+    // wall clock + monitor
+    prims.push(circle(420, 140, 26, 'steelBottle'));
+    prims.push(rect(220, 110, 120, 76, 'glassDeep'));
+    prims.push(rect(228, 118, 104, 60, 'lit'));
+    // surgical light boom
+    prims.push(lineSeg(400, 0, 400, 70, 'steelLine'));
+    prims.push(lineSeg(400, 70, 330, 150, 'steelLine'));
+    prims.push(circle(322, 168, 40, 'litGlow'));
+    prims.push(circle(322, 168, 18, 'litDot'));
+    // OR table
+    prims.push(rect(250, 330, 260, 26, 'panelLight'));
+    prims.push(rect(345, 356, 60, 80, 'panel'));
+    prims.push(rect(320, 436, 110, 14, 'panel'));
+    // equipment towers
+    prims.push(rect(620, 300, 90, 170, 'panel'));
+    prims.push(rect(632, 314, 66, 40, 'glassDeep'));
+    prims.push(circle(645, 380, 6, 'litDot'));
+    prims.push(circle(672, 380, 6, 'litDot'));
+    prims.push(rect(120, 490, 560, 6, 'accentSoft'));
+  },
+
   /* Hospitality interior — restaurant/bar build-out */
   hospitality(prims) {
     prims.push(rect(0, 0, W, 600, 'massDark'));
