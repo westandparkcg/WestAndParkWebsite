@@ -32,8 +32,12 @@ form?.addEventListener('submit', async (e) => {
     if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || String(res.status));
     status.textContent = 'Sent — thank you. A project executive will reply within one business day.';
     form.reset();
-  } catch {
-    status.textContent = `Something went wrong sending the form. Please email ${INBOX} directly.`;
+  } catch (err) {
+    // Never surface the raw FormSubmit response (it can include the
+    // internal inbox alias) to the visitor — show a safe fallback instead.
+    status.textContent = /activation/i.test(String(err?.message))
+      ? 'Thanks — this form is finishing one-time setup. Please try again shortly, or call to reach us directly.'
+      : 'Something went wrong sending the form. Please call to reach us directly.';
   } finally {
     btn.disabled = false;
   }
