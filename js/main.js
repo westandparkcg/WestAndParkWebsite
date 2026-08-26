@@ -62,18 +62,4 @@ if (method) {
   ).join('');
 }
 
-/* Testimonials — pull the three strongest quotes */
-const quotes = document.querySelector('[data-quotes]');
-if (quotes) {
-  const picks = [PROJECTS[0], PROJECTS[3], PROJECTS[5]];
-  quotes.innerHTML = picks.map(
-    (p) => `
-    <div class="quote-cell">
-      <div class="quote-mark" aria-hidden="true">“</div>
-      <blockquote>${p.quote.text}</blockquote>
-      <p class="quote-attr"><strong>${p.quote.author}</strong>${p.quote.role} · <a href="/project.html?id=${p.id}" class="gold">${p.name}</a></p>
-    </div>`
-  ).join('');
-}
-
 initReveals();
