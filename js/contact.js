@@ -4,12 +4,12 @@ import { initChrome, initReveals } from './ui.js';
 initChrome();
 
 /* ---------- Form ----------
-   Delivers via FormSubmit to westandparkcg@gmail.com.
-   NOTE: the very first submission triggers a one-time activation
-   email from FormSubmit to that inbox — click "Activate" once and
-   all future submissions arrive normally.
-   When the company domain email is ready, change INBOX below. */
-const INBOX = 'westandparkcg@gmail.com';
+   Delivers via FormSubmit to the company inbox (currently the
+   gmail account, addressed by FormSubmit's random alias so the
+   raw address isn't scrapeable from this file). When the company
+   domain email is ready: submit once to the new address, click
+   the activation email, and replace INBOX with the new alias. */
+const INBOX = '8bec16101fee2a495d41a4f33cac4898';
 const form = document.querySelector('[data-contact-form]');
 const status = document.querySelector('[data-form-status]');
 form?.addEventListener('submit', async (e) => {
