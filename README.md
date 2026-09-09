@@ -58,6 +58,81 @@ the card media in `ui.js`) with `<img>` tags. Nothing else needs to change.
   brand board. Both were extracted from the official logo sheet with transparent
   backgrounds; to swap in higher-res exports, replace the files under the same names.
 
+## Expo raffle (raffle.html)
+
+A standalone lead-capture flow for trade-show booths — not linked from the
+main site nav (reached only via direct URL / QR code), backed by a real
+database, a password-gated admin table, and a printable QR flyer.
+
+**Pages:**
+- `/raffle.html` — the public entry form (name, phone, title/company, email).
+  Mobile-first; this is what the QR code points to.
+- `/raffle-admin.html` — password-gated table of every entry, with a
+  **Download CSV** button and a refresh/lock control. Not linked anywhere —
+  bookmark it.
+- `/raffle-flyer.html` — a full-bleed, print-ready page with the QR code and
+  a "Scan to Win" headline. Open it and use your browser's Print (or
+  Print → Save as PDF) to make booth signage.
+
+**How data flows:** `POST /api/raffle` ([api/raffle.js](api/raffle.js)) validates
+the submission, writes it to an Airtable table (creating or, if the email
+already exists, *updating* the existing row — one entry per person, so
+re-submitting can't stuff the raffle), and **also** emails a copy through the
+same FormSubmit alias the contact form uses. That email copy means entries
+are never lost even before Airtable is configured — `GET /api/raffle` (used
+by the admin page) reads straight back from Airtable.
+
+### One-time setup (you need to do this — I can't create third-party accounts for you)
+
+1. **Airtable** (free): create an account at airtable.com → new Base → one
+   table named exactly `Raffle Entries` with these fields:
+   - `Name` (single line text)
+   - `Phone` (single line text)
+   - `Title / Company` (single line text)
+   - `Email` (email or single line text)
+   - `Submitted At` (date, include time)
+   - `Updated At` (date, include time)
+   - `Source` (single line text)
+
+   Then: account icon → **Developer hub** → **Personal access tokens** → create
+   one scoped to `data.records:read` + `data.records:write` on that base.
+   Copy the token, and copy the Base ID from the base's API docs page (starts
+   with `app...`).
+
+2. **Vercel project → Settings → Environment Variables**, add:
+   | Name | Value |
+   |---|---|
+   | `AIRTABLE_API_KEY` | the personal access token from step 1 |
+   | `AIRTABLE_BASE_ID` | the base ID (starts `app...`) |
+   | `AIRTABLE_TABLE_NAME` | `Raffle Entries` |
+   | `RAFFLE_ADMIN_TOKEN` | a password you make up — this unlocks the admin page |
+
+   Redeploy (or just push any commit) after saving the env vars.
+
+3. Visit `/raffle-admin.html`, enter the `RAFFLE_ADMIN_TOKEN` password you
+   picked. Until step 2 is done, the admin page loads fine but says storage
+   isn't connected yet — check your email in the meantime, every entry is
+   still arriving there.
+
+### Security notes
+
+- The admin page is gated by one shared password (`RAFFLE_ADMIN_TOKEN`), sent
+  as a header and checked server-side — never in the URL, never persisted to
+  `localStorage` (only `sessionStorage`, cleared when the tab closes). This is
+  a lightweight gate appropriate for a small internal tool, not a full
+  multi-user login system — don't post the admin URL or password anywhere
+  public, and pick a real random password, not something guessable.
+- The public form has a honeypot field and a minimum-time-on-page check to
+  filter obvious bots; it does not use a CAPTCHA. For a short, staffed expo
+  window this is a reasonable trade-off.
+
+### If the raffle URL ever changes
+
+Edit `URL_TO_ENCODE` in [scripts/generate-raffle-qr.mjs](scripts/generate-raffle-qr.mjs),
+then run `node scripts/generate-raffle-qr.mjs` to regenerate
+`assets/raffle-qr.svg` (used by the flyer) — and update the URL baked into
+`raffle-flyer.html` too.
+
 ## Dev conveniences
 
 - `?static=1` — disables all animation and shows every section instantly.

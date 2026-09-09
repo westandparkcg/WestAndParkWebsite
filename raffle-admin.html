@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raffle Entries — Admin</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" href="/assets/wp-mark.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/raffle.css" />
+</head>
+<body>
+  <div class="raffle-shell bp-ground">
+    <header class="raffle-header">
+      <a class="brand" href="/">
+        <img src="/assets/wp-mark-reverse.png" alt="West + Park Commercial Group" width="67" height="44" />
+      </a>
+    </header>
+
+    <main class="raffle-main" style="align-items:start">
+      <!-- Password gate -->
+      <div class="admin-gate" data-admin-gate>
+        <p class="kicker" style="justify-content:center">Internal Only</p>
+        <h1 style="font-size:var(--text-2xl);text-transform:uppercase;margin-top:0.8rem">Raffle Entries</h1>
+        <p class="lede" style="margin-inline:auto">Enter the admin password to view submissions.</p>
+        <form data-admin-form>
+          <div class="field">
+            <label for="admin-token">Password</label>
+            <input id="admin-token" type="password" autocomplete="current-password" required />
+          </div>
+          <p class="raffle-status" data-admin-gate-status role="status"></p>
+          <button class="btn btn-gold" type="submit" style="justify-content:center;width:100%;margin-top:1rem">Unlock</button>
+        </form>
+      </div>
+
+      <!-- Table view (hidden until unlocked) -->
+      <div class="container-wide" data-admin-view hidden style="width:100%">
+        <div class="admin-bar">
+          <p class="admin-count"><strong data-admin-count>0</strong> entries</p>
+          <div class="admin-actions">
+            <button class="btn-line" type="button" data-admin-refresh>Refresh</button>
+            <a class="btn btn-ghost" data-admin-csv href="#">Download CSV</a>
+            <button class="btn-line" type="button" data-admin-logout>Lock</button>
+          </div>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr><th>Name</th><th>Phone</th><th>Title / Company</th><th>Email</th><th>Submitted</th></tr>
+            </thead>
+            <tbody data-admin-rows></tbody>
+          </table>
+          <div class="admin-empty" data-admin-empty hidden></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/raffle-admin.js"></script>
+</body>
+</html>

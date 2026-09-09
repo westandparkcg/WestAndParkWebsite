@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enter Our Raffle — West + Park Commercial Group</title>
+  <meta name="description" content="Enter West + Park Commercial Group's expo raffle — takes less than a minute." />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/assets/wp-mark.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/raffle.css" />
+</head>
+<body>
+  <div class="raffle-shell bp-ground">
+    <header class="raffle-header">
+      <a class="brand" href="/">
+        <img src="/assets/wp-mark-reverse.png" alt="West + Park Commercial Group" width="67" height="44" />
+      </a>
+    </header>
+
+    <main class="raffle-main">
+      <div class="raffle-card" data-raffle-card>
+        <p class="kicker" style="justify-content:center">You're Here — Nice</p>
+        <h1>Enter to Win</h1>
+        <p class="lede">Drop your info below — takes less than a minute. One entry per person; winner announced after the show.</p>
+
+        <form class="raffle-form" data-raffle-form novalidate>
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+          <div class="field">
+            <label for="rf-name">Full Name *</label>
+            <input id="rf-name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="rf-phone">Phone Number *</label>
+            <input id="rf-phone" name="phone" type="tel" autocomplete="tel" required />
+          </div>
+          <div class="field">
+            <label for="rf-company">Title / Company *</label>
+            <input id="rf-company" name="company" autocomplete="organization-title" required placeholder="e.g. Facilities Director, Regional Medical Center" />
+          </div>
+          <div class="field">
+            <label for="rf-email">Email *</label>
+            <input id="rf-email" name="email" type="email" autocomplete="email" required />
+          </div>
+          <button class="btn btn-gold" type="submit" style="justify-content:center">Enter the Raffle <span class="arrow">→</span></button>
+          <p class="raffle-status" data-raffle-status role="status"></p>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script type="module" src="/js/raffle.js"></script>
+</body>
+</html>
