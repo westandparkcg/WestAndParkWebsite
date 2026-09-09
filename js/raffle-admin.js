@@ -5,10 +5,13 @@ const SESSION_KEY = 'raffleAdminToken';
 
 const gate = document.querySelector('[data-admin-gate]');
 const gateStatus = document.querySelector('[data-admin-gate-status]');
+const gateForm = document.querySelector('[data-admin-form]');
+const gateBtn = gateForm.querySelector('button[type="submit"]');
 const view = document.querySelector('[data-admin-view]');
 const rows = document.querySelector('[data-admin-rows]');
 const empty = document.querySelector('[data-admin-empty]');
 const countEl = document.querySelector('[data-admin-count]');
+const viewStatus = document.querySelector('[data-admin-view-status]');
 const csvLink = document.querySelector('[data-admin-csv]');
 
 function esc(s) {
@@ -24,6 +27,12 @@ function fmtDate(iso) {
   } catch {
     return iso;
   }
+}
+
+/** Clears any leftover status text/state left on the (currently hidden) gate panel. */
+function resetGateStatus() {
+  gateStatus.textContent = '';
+  gateStatus.className = 'raffle-status';
 }
 
 async function loadEntries(token) {
@@ -68,11 +77,20 @@ function renderEntries(out) {
     .join('');
 }
 
+function lock() {
+  sessionStorage.removeItem(SESSION_KEY);
+  view.hidden = true;
+  gate.hidden = false;
+  resetGateStatus();
+  document.getElementById('admin-token').value = '';
+}
+
 async function unlockWith(token) {
   const out = await loadEntries(token);
   sessionStorage.setItem(SESSION_KEY, token);
   gate.hidden = true;
   view.hidden = false;
+  resetGateStatus();
   renderEntries(out);
 
   csvLink.onclick = (e) => {
@@ -91,13 +109,25 @@ async function unlockWith(token) {
       });
   };
 
-  document.querySelector('[data-admin-refresh]').onclick = () => loadEntries(token).then(renderEntries).catch(showGateError);
-  document.querySelector('[data-admin-logout]').onclick = () => {
-    sessionStorage.removeItem(SESSION_KEY);
-    view.hidden = true;
-    gate.hidden = false;
-    document.getElementById('admin-token').value = '';
+  document.querySelector('[data-admin-refresh]').onclick = () => {
+    viewStatus.textContent = 'Refreshing…';
+    loadEntries(token)
+      .then((o) => {
+        viewStatus.textContent = '';
+        renderEntries(o);
+      })
+      .catch((err) => {
+        // A 401 means the token was revoked/rotated server-side — log out
+        // fully rather than showing a stale table with no way to retry.
+        if (err.status === 401) {
+          lock();
+          showGateError(err);
+          return;
+        }
+        viewStatus.textContent = err.message || 'Could not refresh — try again.';
+      });
   };
+  document.querySelector('[data-admin-logout]').onclick = lock;
 }
 
 function showGateError(err) {
@@ -105,15 +135,18 @@ function showGateError(err) {
   gateStatus.textContent = err.status === 401 ? 'Incorrect password.' : err.message;
 }
 
-document.querySelector('[data-admin-form]').addEventListener('submit', async (e) => {
+gateForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const token = document.getElementById('admin-token').value.trim();
-  gateStatus.textContent = 'Checking…';
+  gateBtn.disabled = true;
   gateStatus.className = 'raffle-status';
+  gateStatus.textContent = 'Checking…';
   try {
     await unlockWith(token);
   } catch (err) {
     showGateError(err);
+  } finally {
+    gateBtn.disabled = false;
   }
 });
 
