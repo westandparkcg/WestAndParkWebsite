@@ -44,8 +44,10 @@ the card media in `ui.js`) with `<img>` tags. Nothing else needs to change.
 
 - **All project/service/method/stat copy** lives in [js/data.js](js/data.js) —
   every field is placeholder and meant to be replaced with real facts.
-- **Phone, email, address, license #** are placeholders scattered in the HTML —
-  search for `555-0175`, `westandparkcg.com`, `#000000`, `1200 Commerce Way`.
+- **Phone**: (551) 365-6366 — real. **Email**: build@westandparkcg.com — real,
+  displayed sitewide, but the *form itself* still delivers via a FormSubmit
+  alias to the owner's Gmail (see js/contact.js) until that inbox is activated.
+- **Address**: 971 US Highway 202N, #8028, Branchburg, NJ 08876 — real.
 - **Team roster** placeholders are in [js/about.js](js/about.js).
 - **Contact form** currently drafts an email via `mailto:`; point it at a real
   form backend (Formspree/Basin/your endpoint) in [js/contact.js](js/contact.js).
