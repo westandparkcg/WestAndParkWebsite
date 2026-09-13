@@ -133,6 +133,37 @@ then run `node scripts/generate-raffle-qr.mjs` to regenerate
 `assets/raffle-qr.svg` (used by the flyer) — and update the URL baked into
 `raffle-flyer.html` too.
 
+## SEO
+
+The four indexable pages (`index.html`, `services.html`, `about.html`,
+`contact.html`) carry: a unique title + meta description (brand + service +
+"Branchburg, NJ"), a canonical link, Open Graph/Twitter tags, and
+`GeneralContractor` JSON-LD structured data (real NAP — name, address, phone
+— plus hours; no fabricated ratings/reviews). `public/robots.txt` and
+`public/sitemap.xml` are copied verbatim to the site root by Vite's static
+`public/` convention.
+
+**Deliberately excluded from the sitemap and marked `noindex`:** the raffle
+pages (temporary campaign content) and `projects.html` / `project.html` (the
+Projects section is hidden from nav per owner request, and its case-study
+data still has `TODO` placeholders — index it once real facility details
+replace them; see the inline comment on each file's `noindex` tag).
+
+**What this can't do:** on-page tags help Google understand and display the
+site correctly, but they are a small fraction of local-search ranking. The
+highest-leverage things from here are outside this codebase entirely:
+- Claim and fully fill out a **Google Business Profile** (this is usually
+  the single biggest lever for local "front page" / map-pack visibility).
+- Get real client reviews on Google — do not fabricate any; this site
+  already deliberately avoids invented testimonials/ratings.
+- Consistent NAP (name/address/phone) across any directory the business is
+  listed in — it must match the JSON-LD above exactly.
+- Backlinks from real, relevant sites (trade associations, suppliers,
+  local press, chamber of commerce).
+- Once the Projects section is filled with real facility details, unhide it
+  and add it back to the sitemap — case studies are strong long-tail content
+  (e.g. "hospital operating room flooring contractor NJ").
+
 ## Dev conveniences
 
 - `?static=1` — disables all animation and shows every section instantly.
