@@ -94,6 +94,13 @@
   font-size: var(--text-sm);
   margin: 0 0 0.6em;
 }
+.kiosk-scope {
+  color: var(--ink-soft);
+  font-size: var(--text-sm);
+  max-width: 46rem;
+  margin: 0 auto var(--space-3);
+  line-height: 1.5;
+}
 .kiosk-hint {
   color: var(--ink-faint);
   font-size: var(--text-xs);

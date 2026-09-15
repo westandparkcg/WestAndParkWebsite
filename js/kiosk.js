@@ -6,6 +6,7 @@ import { REDUCED } from './ui.js';
 const sliderWrap = document.querySelector('[data-kiosk-slider-wrap]');
 const titleEl = document.querySelector('[data-kiosk-title]');
 const locationEl = document.querySelector('[data-kiosk-location]');
+const scopeEl = document.querySelector('[data-kiosk-scope]');
 const indexEl = document.querySelector('[data-kiosk-index]');
 const totalEl = document.querySelector('[data-kiosk-total]');
 const dotsEl = document.querySelector('[data-kiosk-dots]');
@@ -28,7 +29,7 @@ function render(index) {
   const slider = document.createElement('div');
   slider.className = 'ba-slider';
   slider.dataset.ba = '';
-  slider.dataset.start = '50';
+  slider.dataset.start = '100';
   slider.dataset.beforeSrc = p.before;
   slider.dataset.afterSrc = p.after;
   slider.dataset.label = p.name.toUpperCase();
@@ -37,6 +38,7 @@ function render(index) {
 
   titleEl.textContent = p.name;
   locationEl.textContent = p.location;
+  scopeEl.textContent = p.scope;
   indexEl.textContent = current + 1;
   dots.forEach((d, i) => d.classList.toggle('active', i === current));
 }
