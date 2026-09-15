@@ -10,7 +10,7 @@ if (method) {
     (m) => `
     <div class="method-row">
       <div class="method-step">${m.step}</div>
-      <div class="method-name">${m.name}<span class="time">${m.time}</span></div>
+      <div class="method-name">${m.name}</div>
       <p>${m.text}</p>
     </div>`
   ).join('');
