@@ -14,6 +14,7 @@ export default defineConfig({
         raffle: resolve(__dirname, 'raffle.html'),
         raffleAdmin: resolve(__dirname, 'raffle-admin.html'),
         raffleFlyer: resolve(__dirname, 'raffle-flyer.html'),
+        kiosk: resolve(__dirname, 'kiosk.html'),
       },
     },
   },

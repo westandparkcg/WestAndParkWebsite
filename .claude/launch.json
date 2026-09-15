@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["vite", "--port", "5173", "--strictPort"],
       "port": 5173
+    },
+    {
+      "name": "static-preview",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "5174"],
+      "port": 5174
     }
   ]
 }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Our Work — West + Park Commercial Group</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="/assets/wp-mark.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/kiosk.css" />
+</head>
+<body class="kiosk-body">
+  <div class="kiosk-shell">
+    <header class="kiosk-header">
+      <img class="kiosk-mark" src="/assets/wp-mark-reverse.png" alt="West + Park Commercial Group" width="36" height="24" />
+      <p class="kiosk-count"><span data-kiosk-index>1</span> / <span data-kiosk-total>4</span></p>
+    </header>
+
+    <button class="kiosk-arrow kiosk-arrow-prev" type="button" data-kiosk-prev aria-label="Previous project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="kiosk-arrow kiosk-arrow-next" type="button" data-kiosk-next aria-label="Next project">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+
+    <main class="kiosk-stage">
+      <div class="kiosk-slider-wrap" data-kiosk-slider-wrap>
+        <div class="ba-slider" data-ba data-start="50"></div>
+      </div>
+    </main>
+
+    <footer class="kiosk-footer">
+      <h1 class="kiosk-title" data-kiosk-title></h1>
+      <p class="kiosk-location" data-kiosk-location></p>
+      <p class="kiosk-hint">Drag the photo to compare — tap the arrows to see more of our work</p>
+      <div class="kiosk-dots" data-kiosk-dots role="tablist" aria-label="Choose a project"></div>
+    </footer>
+  </div>
+
+  <script type="module" src="/js/kiosk.js"></script>
+</body>
+</html>

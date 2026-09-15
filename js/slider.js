@@ -13,15 +13,25 @@ export function initSliders(root = document) {
     const scene = slider.dataset.scene;
     const label = slider.dataset.label || 'PROJECT';
     const start = Number(slider.dataset.start || 42);
+    const beforeSrc = slider.dataset.beforeSrc;
+    const afterSrc = slider.dataset.afterSrc;
+    const usePhotos = beforeSrc && afterSrc;
+
+    const afterPane = usePhotos
+      ? `<img src="${afterSrc}" alt="${label} — after" loading="lazy" />`
+      : renderScene(scene, 'after');
+    const beforePane = usePhotos
+      ? `<img src="${beforeSrc}" alt="${label} — before" loading="lazy" />`
+      : renderScene(scene, 'before', label);
 
     slider.innerHTML = `
-      <div class="ba-pane ba-after">${renderScene(scene, 'after')}</div>
-      <div class="ba-pane ba-before">${renderScene(scene, 'before', label)}</div>
+      <div class="ba-pane ba-after">${afterPane}</div>
+      <div class="ba-pane ba-before">${beforePane}</div>
       <div class="ba-divider"><span class="ba-handle" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
       </span></div>
-      <span class="ba-chip before">Before — the plan</span>
-      <span class="ba-chip after">After — the build</span>
+      <span class="ba-chip before">${usePhotos ? 'Before' : 'Before — the plan'}</span>
+      <span class="ba-chip after">${usePhotos ? 'After' : 'After — the build'}</span>
       <input class="ba-range" type="range" min="0" max="100" step="1" value="${start}"
              aria-label="Comparison slider: reveal the blueprint (left) versus the finished project (right)" />`;
 
