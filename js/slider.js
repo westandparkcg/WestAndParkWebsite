@@ -49,32 +49,58 @@ export function initSliders(root = document) {
       set(v);
     };
     let dragging = false;
+    let touched = false;
+    let nudgeTimer = null;
+    const markTouched = () => {
+      if (touched) return;
+      touched = true;
+      slider.classList.add('ba-touched');
+      if (nudgeTimer) clearInterval(nudgeTimer);
+    };
+
     slider.addEventListener('pointerdown', (e) => {
       dragging = true;
+      markTouched();
       slider.setPointerCapture(e.pointerId);
       fromEvent(e);
     });
     slider.addEventListener('pointermove', (e) => dragging && fromEvent(e));
     slider.addEventListener('pointerup', () => (dragging = false));
     slider.addEventListener('pointercancel', () => (dragging = false));
+    range.addEventListener('pointerdown', markTouched);
 
-    // Discovery nudge on first scroll-into-view
+    // Discovery nudge: sweep once it's on screen, then repeat every few
+    // seconds until the visitor actually drags -- a single one-shot pass
+    // is easy to miss on a kiosk nobody is deliberately watching.
     if (!REDUCED) {
+      const sweep = () => {
+        if (touched) return;
+        const t0 = performance.now();
+        const step = (t) => {
+          if (touched || dragging) {
+            set(range.value);
+            return;
+          }
+          const k = (t - t0) / 1400;
+          if (k >= 1) {
+            set(start);
+            return;
+          }
+          set(Math.max(0, Math.min(100, start + Math.sin(k * Math.PI * 2) * 10)));
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      };
       const io = new IntersectionObserver(
         (entries) => {
-          if (!entries[0].isIntersecting) return;
-          io.disconnect();
-          const t0 = performance.now();
-          const nudge = (t) => {
-            const k = (t - t0) / 1200;
-            if (k >= 1 || dragging) {
-              set(range.value);
-              return;
-            }
-            set(start + Math.sin(k * Math.PI * 2) * 7);
-            requestAnimationFrame(nudge);
-          };
-          requestAnimationFrame(nudge);
+          if (!entries[0].isIntersecting || touched) return;
+          sweep();
+          if (!nudgeTimer) {
+            nudgeTimer = setInterval(() => {
+              if (touched) return clearInterval(nudgeTimer);
+              sweep();
+            }, 3600);
+          }
         },
         { threshold: 0.5 }
       );

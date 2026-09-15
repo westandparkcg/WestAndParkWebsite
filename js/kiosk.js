@@ -38,7 +38,7 @@ function render(index) {
 
   titleEl.textContent = p.name;
   locationEl.textContent = p.location;
-  scopeEl.textContent = p.scope;
+  scopeEl.innerHTML = p.scope.map((item) => `<li>${item}</li>`).join('');
   indexEl.textContent = current + 1;
   dots.forEach((d, i) => d.classList.toggle('active', i === current));
 }
