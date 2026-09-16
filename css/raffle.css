@@ -101,7 +101,7 @@
   text-transform: uppercase; letter-spacing: var(--tracking-wide); margin-top: -1rem;
 }
 .flyer-icon { color: #0B1D3A; width: min(200px, 45vw); margin: 0.6rem 0; }
-.flyer-icon svg { width: 100%; height: auto; display: block; }
+.flyer-icon svg { width: 100%; height: auto; display: block; transform: translateY(14px); }
 .flyer-divider { width: 140px; border: none; border-top: 1px solid #d8d2c4; margin: 0.4rem 0; }
 .flyer-card .flyer-fine { color: #5a6472; font-size: var(--text-base); line-height: 1.6; max-width: 44ch; }
 .flyer-card .flyer-url { font-size: var(--text-base); letter-spacing: 0.06em; color: #8A6820; margin-top: -0.6rem; }
