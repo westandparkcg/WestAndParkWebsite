@@ -81,36 +81,31 @@
   background: var(--navy-950);
   padding: 3rem;
 }
+.flyer-page-light { background: #fff; }
 .flyer-card {
   width: min(680px, 100%);
   text-align: center;
-  display: grid; gap: 1.3rem; justify-items: center;
+  display: grid; gap: 1.1rem; justify-items: center;
 }
-.flyer-card .brand img { height: 90px; width: auto; }
-.flyer-card .brand .brand-light { display: none; }
+.flyer-card .brand img { height: 110px; width: auto; }
 .flyer-card .flyer-kicker {
-  color: var(--gold-400); font-weight: 700; font-size: var(--text-sm);
-  letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0;
+  color: #8A6820; font-weight: 700; font-size: var(--text-sm);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0.4rem 0 0;
 }
 .flyer-card h1 {
   font-size: clamp(2.8rem, 7vw, 4.8rem);
-  text-transform: uppercase; line-height: 1.05; color: var(--gold-400);
+  text-transform: uppercase; line-height: 1.05; color: #0B1D3A;
 }
-.flyer-icon { color: var(--gold-400); width: min(190px, 45vw); }
+.flyer-card .flyer-subhead {
+  font-size: var(--text-lg); font-weight: 700; color: #8A6820;
+  text-transform: uppercase; letter-spacing: var(--tracking-wide); margin-top: -0.6rem;
+}
+.flyer-icon { color: #0B1D3A; width: min(180px, 42vw); }
 .flyer-icon svg { width: 100%; height: auto; display: block; }
-.flyer-card .flyer-note { color: var(--ink-soft); font-size: var(--text-lg); max-width: 40ch; }
-.flyer-card .flyer-fine { color: var(--ink-faint); font-size: var(--text-sm); max-width: 44ch; }
-.flyer-card .flyer-url { font-size: var(--text-sm); letter-spacing: 0.06em; color: var(--gold-400); }
+.flyer-card .flyer-fine { color: #4a5568; font-size: var(--text-sm); max-width: 44ch; }
+.flyer-card .flyer-url { font-size: var(--text-sm); letter-spacing: 0.06em; color: #8A6820; }
 
 @media print {
   body { background: #fff !important; }
-  .flyer-page { background: #fff !important; padding: 0; }
-  .flyer-card h1 { color: #8A6820 !important; }
-  .flyer-card .flyer-kicker { color: #8A6820 !important; }
-  .flyer-card .flyer-note { color: #0B1D3A !important; }
-  .flyer-card .flyer-fine { color: #4a5568 !important; }
-  .flyer-card .flyer-url { color: #8A6820 !important; }
-  .flyer-icon { color: #0B1D3A !important; }
-  .flyer-card .brand .brand-dark { display: none; }
-  .flyer-card .brand .brand-light { display: inline-block; }
+  .flyer-page { padding: 0; }
 }
