@@ -83,27 +83,28 @@
 }
 .flyer-page-light { background: #fff; }
 .flyer-card {
-  width: min(680px, 100%);
+  width: min(760px, 100%);
   text-align: center;
-  display: grid; gap: 1.1rem; justify-items: center;
+  display: grid; gap: 1.8rem; justify-items: center;
 }
-.flyer-card .brand img { height: 110px; width: auto; }
+.flyer-card .brand img { height: 150px; width: auto; }
 .flyer-card .flyer-kicker {
-  color: #8A6820; font-weight: 700; font-size: var(--text-sm);
-  letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0.4rem 0 0;
+  color: #8A6820; font-weight: 700; font-size: var(--text-base);
+  letter-spacing: var(--tracking-wide); text-transform: uppercase; margin: 0.6rem 0 0;
 }
 .flyer-card h1 {
-  font-size: clamp(2.8rem, 7vw, 4.8rem);
-  text-transform: uppercase; line-height: 1.05; color: #0B1D3A;
+  font-size: clamp(3.2rem, 8vw, 5.6rem);
+  text-transform: uppercase; line-height: 1.05; color: #0B1D3A; margin-top: -0.6rem;
 }
 .flyer-card .flyer-subhead {
-  font-size: var(--text-lg); font-weight: 700; color: #8A6820;
-  text-transform: uppercase; letter-spacing: var(--tracking-wide); margin-top: -0.6rem;
+  font-size: var(--text-xl); font-weight: 700; color: #8A6820;
+  text-transform: uppercase; letter-spacing: var(--tracking-wide); margin-top: -1rem;
 }
-.flyer-icon { color: #0B1D3A; width: min(180px, 42vw); }
+.flyer-icon { color: #0B1D3A; width: min(200px, 45vw); margin: 0.6rem 0; }
 .flyer-icon svg { width: 100%; height: auto; display: block; }
-.flyer-card .flyer-fine { color: #4a5568; font-size: var(--text-sm); max-width: 44ch; }
-.flyer-card .flyer-url { font-size: var(--text-sm); letter-spacing: 0.06em; color: #8A6820; }
+.flyer-divider { width: 140px; border: none; border-top: 1px solid #d8d2c4; margin: 0.4rem 0; }
+.flyer-card .flyer-fine { color: #5a6472; font-size: var(--text-base); line-height: 1.6; max-width: 44ch; }
+.flyer-card .flyer-url { font-size: var(--text-base); letter-spacing: 0.06em; color: #8A6820; margin-top: -0.6rem; }
 
 @media print {
   body { background: #fff !important; }
