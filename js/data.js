@@ -167,25 +167,21 @@ export const METHOD = [
   {
     step: '01',
     name: 'Discover',
-    time: 'Weeks 1–2',
     text: 'We listen first. Site walk, goals, constraints, budget reality — you leave the first meeting knowing whether your project is feasible and what it will take.',
   },
   {
     step: '02',
     name: 'Define',
-    time: 'Weeks 2–6',
     text: 'Preconstruction turns intent into numbers: estimates, schedule model, procurement plan, and the risks named out loud — before you commit.',
   },
   {
     step: '03',
     name: 'Design',
-    time: 'Months 2–5',
     text: 'Working alongside your architect (or bringing ours), we price the design as it develops so the budget and the drawings never drift apart.',
   },
   {
     step: '04',
     name: 'Deliver',
-    time: 'Construction',
     text: 'A dedicated superintendent, a weekly owner report you can read in five minutes, and a site your neighbors will compliment. Zero-surprise is the standard.',
   },
 ];

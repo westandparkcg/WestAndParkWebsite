@@ -12,12 +12,6 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "5174"],
       "port": 5174
-    },
-    {
-      "name": "static-preview2",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "5199"],
-      "port": 5199
     }
   ]
 }
