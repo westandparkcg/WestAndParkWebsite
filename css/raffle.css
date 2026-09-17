@@ -71,6 +71,7 @@
   color: var(--gold-500); background: var(--bg-panel); position: sticky; top: 0;
 }
 .admin-table tbody tr:hover { background: var(--bg-panel); }
+.admin-table td:nth-child(5) { white-space: normal; max-width: 280px; }
 .admin-empty { padding: 3rem 1rem; text-align: center; color: var(--ink-faint); }
 .admin-empty a { color: var(--gold-400); }
 

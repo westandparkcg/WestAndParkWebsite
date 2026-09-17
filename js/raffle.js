@@ -19,6 +19,7 @@ form?.addEventListener('submit', async (e) => {
     phone: d.get('phone'),
     company: d.get('company'),
     email: d.get('email'),
+    notes: d.get('notes'),
     _honey: d.get('_honey'),
     _loadedAt: loadedAt,
   };

@@ -90,6 +90,7 @@ by the admin page) reads straight back from Airtable.
    - `Phone` (single line text)
    - `Title / Company` (single line text)
    - `Email` (email or single line text)
+   - `Notes` (long text)
    - `Submitted At` (date, include time)
    - `Updated At` (date, include time)
    - `Source` (single line text)

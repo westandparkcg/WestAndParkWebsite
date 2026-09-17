@@ -71,6 +71,7 @@ function renderEntries(out) {
         <td>${esc(e.phone)}</td>
         <td>${esc(e.company)}</td>
         <td><a href="mailto:${esc(e.email)}" class="gold">${esc(e.email)}</a></td>
+        <td>${esc(e.notes) || '—'}</td>
         <td>${fmtDate(e.submittedAt)}</td>
       </tr>`
     )

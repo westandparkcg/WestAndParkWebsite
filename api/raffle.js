@@ -14,6 +14,7 @@ async function notifyByEmail(entry) {
     email: entry.email,
     phone: entry.phone,
     'title/company': entry.company,
+    notes: entry.notes || '(none)',
     _subject: `New raffle entry — ${entry.name}`,
     _template: 'table',
     _captcha: 'false',
@@ -60,6 +61,7 @@ async function handlePost(req, res) {
         Phone: clean.phone,
         'Title / Company': clean.company,
         Email: clean.email,
+        Notes: clean.notes,
       };
       if (existing) {
         duplicate = true;
@@ -107,6 +109,7 @@ const COLUMNS = [
   { label: 'Phone', get: (r) => r.fields.Phone },
   { label: 'Title / Company', get: (r) => r.fields['Title / Company'] },
   { label: 'Email', get: (r) => r.fields.Email },
+  { label: 'Notes', get: (r) => r.fields.Notes },
   { label: 'Submitted At', get: (r) => r.fields['Submitted At'] },
 ];
 
@@ -138,6 +141,7 @@ async function handleGet(req, res) {
     phone: r.fields.Phone || '',
     company: r.fields['Title / Company'] || '',
     email: r.fields.Email || '',
+    notes: r.fields.Notes || '',
     submittedAt: r.fields['Submitted At'] || '',
     updatedAt: r.fields['Updated At'] || '',
   }));
