@@ -185,3 +185,9 @@ export const METHOD = [
     text: 'A dedicated superintendent, a weekly owner report you can read in five minutes, and a site your neighbors will compliment. Zero-surprise is the standard.',
   },
 ];
+
+/* Featured LinkedIn post shown on the homepage. LinkedIn has no free feed for
+   company pages, so paste the iframe src from the post's "Embed this post"
+   option (https://www.linkedin.com/embed/feed/update/urn:li:share:...).
+   Leave empty to show only the follow card. */
+export const LINKEDIN_POST_EMBED = '';

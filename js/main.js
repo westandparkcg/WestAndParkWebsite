@@ -1,5 +1,5 @@
 /* Homepage */
-import { PROJECTS, SERVICES, METHOD } from './data.js';
+import { PROJECTS, SERVICES, METHOD, LINKEDIN_POST_EMBED } from './data.js';
 import { initChrome, initReveals, mountScenes, projectCard } from './ui.js';
 import { initSliders } from './slider.js';
 
@@ -42,6 +42,14 @@ if (method) {
       <p>${m.text}</p>
     </div>`
   ).join('');
+}
+
+/* Featured LinkedIn post (optional) */
+const liPost = document.querySelector('[data-linkedin-post]');
+if (liPost && LINKEDIN_POST_EMBED) {
+  liPost.innerHTML = `<iframe src="${LINKEDIN_POST_EMBED}" title="Latest West + Park post on LinkedIn" loading="lazy" allowfullscreen></iframe>`;
+  liPost.hidden = false;
+  document.querySelector('[data-linkedin]')?.classList.add('has-post');
 }
 
 initReveals();
